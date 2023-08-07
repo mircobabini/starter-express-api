@@ -1,0 +1,3 @@
+https://app.cyclic.sh/
+https://ably.com/topic/websockets-vs-http
+https://fjolt.com/article/javascript-websockets
