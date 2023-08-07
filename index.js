@@ -1,9 +1,3 @@
-// Import path and url dependencies
-const path = require('path')
-const {fileURLToPath} = require('url')
-
-// Get the directory and file path
-
 // Import express, expressWs, and http
 const express = require('express')
 const expressWs = require('express-ws')
@@ -19,24 +13,18 @@ let server = http.createServer(app).listen(port);
 // Apply expressWs
 expressWs(app, server);
 
-app.use(express.static(__dirname + '/views'));
-
-// Get the route /
-app.get('/', (req, res) => {
-    console.log("Just got a request!")
-    res.status(200).send("Welcome to our app");
-});
-
 // This lets the server pick up the '/ws' WebSocket route
 app.ws('/ws', async function (ws, req) {
+    console.log("Remote: " + req.socket.remoteAddress);
+
     // After which we wait for a message and respond to it
     ws.on('message', async function (msg) {
         // What was the message?
         console.log(msg);
         // Send back some data
         ws.send(JSON.stringify({
-            "append" : true,
-            "returnText" : "I am using WebSockets (ok)!"
+            "append": true,
+            "returnText": "I am using WebSockets (ok)!"
         }));
     });
 });
